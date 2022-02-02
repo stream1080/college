@@ -42,18 +42,18 @@ public class Swagger2Config {
     private ApiInfo webApiInfo(){
         return new ApiInfoBuilder()
                 .title("网站的API文档")
-                .description("本文档描述了谷粒学院网站的api接口定义")
+                .description("本文档描述了慕课学院网站的api接口定义")
                 .version("1.0")
-                .contact(new Contact("Helen", "http://atguigu.com", "55317332@qq.com"))
+                .contact(new Contact("stream", "http://stream.com", "stream@gmail.com"))
                 .build();
     }
 
     private ApiInfo adminApiInfo(){
         return new ApiInfoBuilder()
                 .title("后台管理系统的API文档")
-                .description("本文档描述了谷粒学院后台管理系统的api接口定义")
+                .description("本文档描述了慕课学院后台管理系统的api接口定义")
                 .version("1.0")
-                .contact(new Contact("Helen", "http://atguigu.com", "55317332@qq.com"))
+                .contact(new Contact("stream", "http://stream.com", "stream@gmail.com"))
                 .build();
     }
 }

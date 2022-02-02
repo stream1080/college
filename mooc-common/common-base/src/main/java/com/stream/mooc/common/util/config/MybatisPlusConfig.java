@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.stream.mooc.mooc-service.*.mapper")
+@MapperScan("com.stream.mooc.service.*.mapper")
 public class MybatisPlusConfig {
 
     /**

@@ -1,4 +1,4 @@
-package com.stream.mooc.common.base.util;
+package com.stream.mooc.common.util.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;

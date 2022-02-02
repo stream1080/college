@@ -1,4 +1,4 @@
-package com.stream.mooc.common.base.result;
+package com.stream.mooc.common.util.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

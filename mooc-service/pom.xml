@@ -11,17 +11,10 @@
 
     <artifactId>mooc-service</artifactId>
     <packaging>pom</packaging>
-<!--    <modules>-->
-<!--        <module>service_edu</module>-->
-<!--        <module>service_oss</module>-->
-<!--        <module>service_vod</module>-->
-<!--        <module>service_cms</module>-->
-<!--        <module>service_msm</module>-->
-<!--        <module>service_ucenter</module>-->
-<!--        <module>service_order</module>-->
-<!--        <module>service_statistics</module>-->
-<!--        <module>service_acl</module>-->
-<!--    </modules>-->
+
+    <modules>
+        <module>mooc-edu</module>
+    </modules>
 
     <dependencies>
         <dependency>

@@ -1,8 +1,11 @@
 package com.stream.mooc.service.edu.controller.admin;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stream.mooc.common.util.result.R;
 import com.stream.mooc.service.edu.entity.Teacher;
+import com.stream.mooc.service.edu.entity.vo.TeacherQueryVo;
 import com.stream.mooc.service.edu.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -44,18 +47,18 @@ public class TeacherController {
         }
     }
 
-//    @ApiOperation("讲师分页列表")
-//    @GetMapping("list/{page}/{limit}")
-//    public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
-//                      @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit,
-//                      @ApiParam("讲师列表查询对象") TeacherQueryVo teacherQueryVo){
-//
-//        Page<Teacher> pageParam = new Page<>(page, limit);
-//        IPage<Teacher> pageModel = teacherService.selectPage(pageParam, teacherQueryVo);
-//        List<Teacher> records = pageModel.getRecords();
-//        long total = pageModel.getTotal();
-//        return R.ok().data("total", total).data("rows", records);
-//    }
+    @ApiOperation("讲师分页列表")
+    @GetMapping("list/{page}/{limit}")
+    public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
+                      @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit,
+                      @ApiParam("讲师列表查询对象") TeacherQueryVo teacherQueryVo){
+
+        Page<Teacher> pageParam = new Page<>(page, limit);
+        IPage<Teacher> pageModel = teacherService.selectPage(pageParam, teacherQueryVo);
+        List<Teacher> records = pageModel.getRecords();
+        long total = pageModel.getTotal();
+        return R.ok().data("total", total).data("rows", records);
+    }
 
     @ApiOperation("新增讲师")
     @PostMapping("save")

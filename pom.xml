@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.stream</groupId>
-    <artifactId>mooc</artifactId>
+    <artifactId>college</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mooc</name>
+    <name>college</name>
     <description>慕课学院-聚合服务</description>
 
     <modules>

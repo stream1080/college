@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan({"com.stream.mooc"})
-public class MoocEduApplication {
+public class ServiceEduApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MoocEduApplication.class, args);
+        SpringApplication.run(ServiceEduApplication.class, args);
     }
 }

@@ -4,16 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.stream</groupId>
-    <artifactId>mooc</artifactId>
+    <artifactId>college</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mooc</name>
+    <name>college</name>
     <description>慕课学院-聚合服务</description>
 
     <modules>
-        <module>mooc-common</module>
-        <module>mooc-service</module>
-        <module>mooc-gateway</module>
+        <module>common</module>
+        <module>service</module>
+        <module>gateway</module>
     </modules>
 
     <parent>
@@ -56,7 +56,6 @@
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>Hoxton.SR1</version>
                 <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -64,7 +63,6 @@
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>2.1.0.RELEASE</version>
                 <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <!--mybatis-plus 持久层-->

@@ -13,7 +13,7 @@
     <modules>
         <module>common</module>
         <module>mooc-service</module>
-        <module>mooc-gateway</module>
+        <module>gateway</module>
     </modules>
 
     <parent>

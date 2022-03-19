@@ -11,7 +11,7 @@
     <description>慕课学院-聚合服务</description>
 
     <modules>
-        <module>mooc-common</module>
+        <module>common</module>
         <module>mooc-service</module>
         <module>mooc-gateway</module>
     </modules>

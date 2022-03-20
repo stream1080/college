@@ -1,4 +1,4 @@
-package com.stream.college.common.util.model;
+package com.stream.college.common.utils.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

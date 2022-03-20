@@ -3,7 +3,7 @@ package com.stream.college.service.edu.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.stream.college.common.util.result.R;
+import com.stream.college.common.utils.result.R;
 import com.stream.college.service.edu.entity.Teacher;
 import com.stream.college.service.edu.entity.vo.TeacherQueryVo;
 import com.stream.college.service.edu.service.TeacherService;

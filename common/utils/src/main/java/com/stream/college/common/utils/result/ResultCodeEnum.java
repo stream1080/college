@@ -1,4 +1,4 @@
-package com.stream.college.common.util.result;
+package com.stream.college.common.utils.result;
 
 import lombok.Getter;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package com.stream.college.common.util.config;
+package com.stream.college.common.utils.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;

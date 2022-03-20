@@ -1,6 +1,6 @@
-package com.stream.college.common.util.exception;
+package com.stream.college.common.utils.exception;
 
-import com.stream.college.common.util.result.ResultCodeEnum;
+import com.stream.college.common.utils.result.ResultCodeEnum;
 import lombok.Data;
 
 /**

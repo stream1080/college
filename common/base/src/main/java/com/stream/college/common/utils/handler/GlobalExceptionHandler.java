@@ -1,9 +1,9 @@
-package com.stream.college.common.util.handler;
+package com.stream.college.common.utils.handler;
 
-import com.stream.college.common.util.exception.CollegeException;
-import com.stream.college.common.util.result.R;
-import com.stream.college.common.util.result.ResultCodeEnum;
-import com.stream.college.common.util.util.ExceptionUtils;
+import com.stream.college.common.utils.exception.CollegeException;
+import com.stream.college.common.utils.result.R;
+import com.stream.college.common.utils.result.ResultCodeEnum;
+import com.stream.college.common.utils.util.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;

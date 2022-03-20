@@ -1,10 +1,10 @@
 package com.stream.college.service.oss.controller.admin;
 
 
-import com.stream.college.common.util.exception.CollegeException;
-import com.stream.college.common.util.result.R;
-import com.stream.college.common.util.result.ResultCodeEnum;
-import com.stream.college.common.util.util.ExceptionUtils;
+import com.stream.college.common.utils.exception.CollegeException;
+import com.stream.college.common.utils.result.R;
+import com.stream.college.common.utils.result.ResultCodeEnum;
+import com.stream.college.common.utils.util.ExceptionUtils;
 import com.stream.college.service.oss.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

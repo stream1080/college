@@ -1,4 +1,4 @@
-package com.stream.college.common.util.util;
+package com.stream.college.common.utils.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;

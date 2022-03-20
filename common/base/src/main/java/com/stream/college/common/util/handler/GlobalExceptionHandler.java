@@ -1,5 +1,6 @@
 package com.stream.college.common.util.handler;
 
+import com.stream.college.common.util.exception.CollegeException;
 import com.stream.college.common.util.result.R;
 import com.stream.college.common.util.result.ResultCodeEnum;
 import com.stream.college.common.util.util.ExceptionUtils;
@@ -20,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public R error(Exception e){
+    public R error(Exception e) {
 //        e.printStackTrace();
         log.error(ExceptionUtils.getMessage(e));
         return R.error();
@@ -28,15 +29,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadSqlGrammarException.class)
     @ResponseBody
-    public R error(BadSqlGrammarException e){
+    public R error(BadSqlGrammarException e) {
         log.error(ExceptionUtils.getMessage(e));
         return R.setResult(ResultCodeEnum.BAD_SQL_GRAMMAR);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
-    public R error(HttpMessageNotReadableException e){
+    public R error(HttpMessageNotReadableException e) {
         log.error(ExceptionUtils.getMessage(e));
         return R.setResult(ResultCodeEnum.JSON_PARSE_ERROR);
+    }
+
+    @ExceptionHandler(CollegeException.class)
+    @ResponseBody
+    public R error(CollegeException e) {
+        log.error(ExceptionUtils.getMessage(e));
+        return R.error().message(e.getMessage()).code(e.getCode());
     }
 }

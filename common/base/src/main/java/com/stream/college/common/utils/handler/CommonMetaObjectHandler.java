@@ -1,4 +1,4 @@
-package com.stream.college.common.util.handler;
+package com.stream.college.common.utils.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

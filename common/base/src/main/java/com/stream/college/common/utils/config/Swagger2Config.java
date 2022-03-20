@@ -1,4 +1,4 @@
-package com.stream.college.common.util.config;
+package com.stream.college.common.utils.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;

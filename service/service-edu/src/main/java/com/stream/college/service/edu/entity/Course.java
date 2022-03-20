@@ -1,7 +1,7 @@
 package com.stream.college.service.edu.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.stream.college.common.util.model.BaseEntity;
+import com.stream.college.common.utils.model.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

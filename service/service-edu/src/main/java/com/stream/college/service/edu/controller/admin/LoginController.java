@@ -1,6 +1,6 @@
 package com.stream.college.service.edu.controller.admin;
 
-import com.stream.college.common.util.result.R;
+import com.stream.college.common.utils.result.R;
 import org.springframework.web.bind.annotation.*;
 
 /**

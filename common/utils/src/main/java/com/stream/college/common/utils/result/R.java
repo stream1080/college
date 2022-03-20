@@ -1,4 +1,4 @@
-package com.stream.college.common.util.result;
+package com.stream.college.common.utils.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.stream.college.common.utils.result.R;
 import com.stream.college.service.edu.entity.Teacher;
-import com.stream.college.service.edu.mapper.TeacherMapper;
 import com.stream.college.service.edu.entity.vo.TeacherQueryVo;
+import com.stream.college.service.edu.feign.OssFileService;
+import com.stream.college.service.edu.mapper.TeacherMapper;
 import com.stream.college.service.edu.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -22,6 +25,9 @@ import org.springframework.util.StringUtils;
 @Service
 public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> implements TeacherService {
 
+    @Autowired
+    OssFileService ossFileService;
+
     @Override
     public IPage<Teacher> selectPage(Page<Teacher> pageParam, TeacherQueryVo teacherQueryVo) {
 
@@ -30,7 +36,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         queryWrapper.orderByAsc("sort");
 
         //2、分页查询
-        if(teacherQueryVo == null){
+        if (teacherQueryVo == null) {
             return baseMapper.selectPage(pageParam, queryWrapper);
         }
 
@@ -40,22 +46,37 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         String joinDateBegin = teacherQueryVo.getJoinDateBegin();
         String joinDateEnd = teacherQueryVo.getJoinDateEnd();
 
-        if(!StringUtils.isEmpty(name)){
+        if (!StringUtils.isEmpty(name)) {
             queryWrapper.likeRight("name", name);
         }
 
-        if(level != null){
+        if (level != null) {
             queryWrapper.eq("level", level);
         }
 
-        if(!StringUtils.isEmpty(joinDateBegin)){
+        if (!StringUtils.isEmpty(joinDateBegin)) {
             queryWrapper.ge("join_date", joinDateBegin);
         }
 
-        if(!StringUtils.isEmpty(joinDateEnd)){
+        if (!StringUtils.isEmpty(joinDateEnd)) {
             queryWrapper.le("join_date", joinDateEnd);
         }
 
         return baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    @Override
+    public Boolean removeAvatarById(String id) {
+        //根据id获取讲师avatar 的 url
+        Teacher teacher = baseMapper.selectById(id);
+        if (teacher != null) {
+            String avatar = teacher.getAvatar();
+            if (!StringUtils.isEmpty(avatar)) {
+                R r = ossFileService.removeFile(avatar);
+                return r.getSuccess();
+            }
+        }
+
+        return false;
     }
 }

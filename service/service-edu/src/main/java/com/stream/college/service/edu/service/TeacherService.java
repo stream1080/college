@@ -24,4 +24,12 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     IPage<Teacher> selectPage(Page<Teacher> pageParam, TeacherQueryVo teacherQueryVo);
+
+    /**
+     * 删除讲师头像
+     *
+     * @param id
+     * @return
+     */
+    Boolean removeAvatarById(String id);
 }

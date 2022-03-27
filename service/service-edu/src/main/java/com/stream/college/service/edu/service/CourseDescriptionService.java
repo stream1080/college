@@ -2,6 +2,7 @@ package com.stream.college.service.edu.service;
 
 import com.stream.college.service.edu.entity.CourseDescription;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author stream
  * @since 2022-02-02
  */
+@Repository
 public interface CourseDescriptionService extends IService<CourseDescription> {
 
 }

@@ -1,5 +1,7 @@
 package com.stream.college.service.edu.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.stream.college.common.utils.model.BaseEntity;
 import io.swagger.annotations.ApiModel;
@@ -24,6 +26,10 @@ import lombok.experimental.Accessors;
 public class CourseDescription extends BaseEntity {
 
     private static final long serialVersionUID=1L;
+
+    @ApiModelProperty(value = "讲师ID")
+    @TableId(value = "id", type = IdType.NONE)
+    private String id;
 
     @ApiModelProperty(value = "课程简介")
     private String description;

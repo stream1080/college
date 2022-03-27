@@ -1,4 +1,4 @@
-package com.stream.college.service.edu.controller;
+package com.stream.college.service.edu.controller.admin;
 
 
 import com.stream.college.common.utils.result.R;

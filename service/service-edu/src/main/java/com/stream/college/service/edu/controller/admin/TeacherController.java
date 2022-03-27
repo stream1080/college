@@ -7,6 +7,7 @@ import com.stream.college.common.utils.result.R;
 import com.stream.college.service.edu.entity.Teacher;
 import com.stream.college.service.edu.entity.vo.TeacherQueryVo;
 import com.stream.college.service.edu.service.TeacherService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
+@Api(description = "讲师管理")
 @RequestMapping("/admin/edu/teacher")
 public class TeacherController {
 

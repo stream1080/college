@@ -25,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@Api(description = "讲师管理")
+@Api(tags = "讲师管理")
 @RequestMapping("/admin/edu/teacher")
 public class TeacherController {
 

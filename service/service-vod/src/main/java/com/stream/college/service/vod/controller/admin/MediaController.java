@@ -21,11 +21,11 @@ import java.util.List;
  * @author stream
  * @since 2022/3/27 20:25
  */
-@Api(description = "阿里云视频点播")
+@Slf4j
 @CrossOrigin //跨域
 @RestController
+@Api(tags = "阿里云视频点播")
 @RequestMapping("/admin/vod/media")
-@Slf4j
 public class MediaController {
 
     @Autowired
@@ -66,11 +66,11 @@ public class MediaController {
     @DeleteMapping("remove")
     public R removeVideoByIdList(
             @ApiParam(value = "阿里云视频id列表", required = true)
-            @RequestBody List<String> videoIdList){
+            @RequestBody List<String> videoIdList) {
 
         try {
             videoService.removeVideoByIdList(videoIdList);
-            return  R.ok().message("视频删除成功");
+            return R.ok().message("视频删除成功");
         } catch (Exception e) {
             log.error(ExceptionUtils.getMessage(e));
             throw new CollegeException(ResultCodeEnum.VIDEO_DELETE_ALIYUN_ERROR);

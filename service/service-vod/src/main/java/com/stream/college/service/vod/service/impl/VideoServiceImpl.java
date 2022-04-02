@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author stream
@@ -65,6 +66,33 @@ public class VideoServiceImpl implements VideoService {
         //支持传入多个视频ID，多个用逗号分隔
         request.setVideoIds(videoId);
         client.getAcsResponse(request);
+    }
+
+    @Override
+    public void removeVideoByIdList(List<String> videoIdList) throws ClientException {
+        DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(
+                vodProperties.getKeyid(),
+                vodProperties.getKeysecret());
+
+        DeleteVideoRequest request = new DeleteVideoRequest();
+
+        int size = videoIdList.size();//id列表的长度
+        StringBuffer idListStr = new StringBuffer(); //组装好的字符串
+        for (int i = 0; i < size; i++) {
+            idListStr.append(videoIdList.get(i));
+//            if(i == size - 1 ) //假设 size <= 20
+            if (i == size - 1 || i % 20 == 19) {
+                //删除
+                //支持传入多个视频ID，多个用逗号分隔。id不能超过20个
+//                log.info("idListStr = " + idListStr.toString());
+                request.setVideoIds(idListStr.toString());
+                client.getAcsResponse(request);
+                //重置idListStr
+                idListStr = new StringBuffer();
+            } else if (i % 20 < 19) {
+                idListStr.append(",");
+            }
+        }
     }
 
 }

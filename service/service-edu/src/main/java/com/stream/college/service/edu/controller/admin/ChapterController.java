@@ -5,6 +5,7 @@ import com.stream.college.common.utils.result.R;
 import com.stream.college.service.edu.entity.Chapter;
 import com.stream.college.service.edu.entity.vo.ChapterVo;
 import com.stream.college.service.edu.service.ChapterService;
+import com.stream.college.service.edu.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -31,6 +32,9 @@ public class ChapterController {
 
     @Autowired
     private ChapterService chapterService;
+
+    @Autowired
+    private VideoService videoService;
 
     @ApiOperation("新增章节")
     @PostMapping("save")
@@ -79,8 +83,8 @@ public class ChapterController {
             @ApiParam(value = "章节ID", required = true)
             @PathVariable String id){
 
-        //TODO: 删除课程视频
-        //此处调用vod中的删除视频文件的接口
+        //删除课程视频
+        videoService.removeMediaVideoByChapterId(id);
 
         //删除章节
         boolean result = chapterService.removeChapterById(id);

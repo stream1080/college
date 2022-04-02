@@ -8,6 +8,7 @@ import com.stream.college.service.edu.entity.vo.CoursePublishVo;
 import com.stream.college.service.edu.entity.vo.CourseQueryVo;
 import com.stream.college.service.edu.entity.vo.CourseVo;
 import com.stream.college.service.edu.service.CourseService;
+import com.stream.college.service.edu.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,6 +35,9 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private VideoService videoService;
 
     @ApiOperation("新增课程")
     @PostMapping("save-course-info")
@@ -74,7 +78,7 @@ public class CourseController {
     @GetMapping("list/{page}/{limit}")
     public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
                       @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit,
-                      @ApiParam("课程列表查询对象") CourseQueryVo courseQueryVo){
+                      @ApiParam("课程列表查询对象") CourseQueryVo courseQueryVo) {
 
         IPage<CourseVo> pageModel = courseService.selectPage(page, limit, courseQueryVo);
         List<CourseVo> records = pageModel.getRecords();
@@ -84,19 +88,19 @@ public class CourseController {
 
     @ApiOperation("根据ID删除课程")
     @DeleteMapping("remove/{id}")
-    public R removeById(@ApiParam(value = "课程id", required = true) @PathVariable String id){
+    public R removeById(@ApiParam(value = "课程id", required = true) @PathVariable String id) {
 
-        //TODO: 删除课程视频
-        //此处调用vod中的删除视频文件的接口
+        //删除课程视频
+        videoService.removeMediaVideoByCourseId(id);
 
         //删除课程封面
         courseService.removeCoverById(id);
 
         //删除课程
         boolean result = courseService.removeCourseById(id);
-        if(result){
+        if (result) {
             return R.ok().message("删除成功");
-        }else{
+        } else {
             return R.error().message("数据不存在");
         }
     }
@@ -105,7 +109,7 @@ public class CourseController {
     @GetMapping("course-publish/{id}")
     public R getCoursePublishVoById(
             @ApiParam(value = "课程ID", required = true)
-            @PathVariable String id){
+            @PathVariable String id) {
 
         CoursePublishVo coursePublishVo = courseService.getCoursePublishVoById(id);
         if (coursePublishVo != null) {
@@ -119,7 +123,7 @@ public class CourseController {
     @PutMapping("publish-course/{id}")
     public R publishCourseById(
             @ApiParam(value = "课程ID", required = true)
-            @PathVariable String id){
+            @PathVariable String id) {
 
         boolean result = courseService.publishCourseById(id);
         if (result) {

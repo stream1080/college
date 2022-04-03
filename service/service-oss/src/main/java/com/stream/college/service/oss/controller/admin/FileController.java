@@ -21,11 +21,11 @@ import java.util.concurrent.TimeUnit;
  * @author stream
  * @since 2022/3/20 14:53
  */
-@Api("阿里云文件管理")
+@Slf4j
 @CrossOrigin
 @RestController
+@Api(tags = "阿里云文件管理")
 @RequestMapping("/admin/oss/file")
-@Slf4j
 public class FileController {
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.stream.college.service.edu.controller;
 
 import com.stream.college.common.utils.result.R;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/user")
+@Api(tags = "登录管理")
 @CrossOrigin
 public class LoginController {
 

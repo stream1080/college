@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-02-02
  */
 @CrossOrigin
-@Api(description = "课时管理")
+@Api(tags = "课时管理")
 @RestController
 @RequestMapping("/admin/edu/video")
 @Slf4j

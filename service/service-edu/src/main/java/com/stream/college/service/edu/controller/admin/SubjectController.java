@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Slf4j
 @CrossOrigin //允许跨域
-@Api(description = "课程分类管理")
+@Api(tags = "课程分类管理")
 @RestController
 @RequestMapping("/admin/edu/subject")
 public class SubjectController {

@@ -1,6 +1,6 @@
 package com.stream.college.service.cms.mapper;
 
-import com.atguigu.guli.service.cms.entity.Ad;
+import com.stream.college.service.cms.entity.Ad;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;

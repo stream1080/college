@@ -1,16 +1,17 @@
 package com.stream.college.service.cms.service.impl;
 
-import com.atguigu.guli.service.cms.entity.Ad;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.stream.college.common.utils.result.R;
+import com.stream.college.service.cms.entity.Ad;
 import com.stream.college.service.cms.entity.vo.AdVo;
 import com.stream.college.service.cms.feign.OssFileService;
 import com.stream.college.service.cms.mapper.AdMapper;
 import com.stream.college.service.cms.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -51,6 +52,24 @@ public class AdServiceImpl extends ServiceImpl<AdMapper, Ad> implements AdServic
             }
         }
         return false;
+    }
+
+    /**
+     * 1、查询 redis 缓存中是否存在需要的数据  hasKey
+     * 2、如果缓存不存在从数据库中取出数据、并将数据存入缓存  set
+     * 3、如果缓存存在则从缓存中读取数据  get
+     *
+     * @param adTypeId
+     * @return
+     */
+    @Cacheable(value = "index", key = "'selectByAdTypeId'")
+    @Override
+    public List<Ad> selectByAdTypeId(String adTypeId) {
+
+        QueryWrapper<Ad> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("sort", "id");
+        queryWrapper.eq("type_id", adTypeId);
+        return baseMapper.selectList(queryWrapper);
     }
 
 }

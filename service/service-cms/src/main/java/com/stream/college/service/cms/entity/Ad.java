@@ -1,4 +1,4 @@
-package com.atguigu.guli.service.cms.entity;
+package com.stream.college.service.cms.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.stream.college.common.utils.model.BaseEntity;

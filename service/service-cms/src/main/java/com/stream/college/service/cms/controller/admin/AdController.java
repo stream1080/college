@@ -1,7 +1,7 @@
 package com.stream.college.service.cms.controller.admin;
 
 
-import com.atguigu.guli.service.cms.entity.Ad;
+import com.stream.college.service.cms.entity.Ad;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.stream.college.common.utils.result.R;
 import com.stream.college.service.cms.entity.vo.AdVo;

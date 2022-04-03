@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.stream.college.service.edu.entity.Teacher;
 import com.stream.college.service.edu.entity.vo.TeacherQueryVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,4 +44,11 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     Map<String, Object> selectTeacherInfoById(String id);
+
+    /**
+     * 获取热门讲师
+     *
+     * @return
+     */
+    List<Teacher> selectHotTeacher();
 }

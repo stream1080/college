@@ -43,4 +43,5 @@ public interface CourseService extends IService<Course> {
      */
     WebCourseVo selectWebCourseVoById(String id);
 
+    List<Course> selectHotCourse();
 }

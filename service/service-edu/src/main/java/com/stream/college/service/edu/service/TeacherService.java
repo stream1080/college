@@ -2,9 +2,11 @@ package com.stream.college.service.edu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.stream.college.service.edu.entity.Teacher;
 import com.stream.college.service.edu.entity.vo.TeacherQueryVo;
-import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -32,4 +34,13 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     Boolean removeAvatarById(String id);
+
+
+    /**
+     * 查看讲师信息
+     *
+     * @param id
+     * @return
+     */
+    Map<String, Object> selectTeacherInfoById(String id);
 }

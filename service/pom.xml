@@ -18,7 +18,7 @@
         <module>service-vod</module>
         <module>service-cms</module>
         <module>service-sms</module>
-        <module>service-user</module>
+        <module>service-ucenter</module>
         <module>service-trade</module>
     </modules>
 

@@ -24,7 +24,6 @@ import java.util.List;
  * @since 2022-02-02
  */
 @RestController
-@CrossOrigin
 @Api(tags = "讲师管理")
 @RequestMapping("/admin/edu/teacher")
 public class TeacherController {

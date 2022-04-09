@@ -22,7 +22,6 @@ import java.util.List;
  * @since 2022/3/27 20:25
  */
 @Slf4j
-@CrossOrigin //跨域
 @RestController
 @Api(tags = "阿里云视频点播")
 @RequestMapping("/admin/vod/media")

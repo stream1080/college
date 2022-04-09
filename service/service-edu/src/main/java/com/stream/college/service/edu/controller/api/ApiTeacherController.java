@@ -17,7 +17,6 @@ import java.util.Map;
  * @author stream
  * @since 2022/4/2 22:58
  */
-@CrossOrigin
 @Api(tags = "讲师")
 @RestController
 @RequestMapping("/api/edu/teacher")

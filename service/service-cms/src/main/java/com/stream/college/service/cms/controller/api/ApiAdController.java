@@ -18,7 +18,6 @@ import java.util.List;
  * @since 2022/4/3 17:18
  */
 @Slf4j
-@CrossOrigin //解决跨域问题
 @Api(tags = "广告推荐")
 @RestController
 @RequestMapping("/api/cms/ad")

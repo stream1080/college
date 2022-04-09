@@ -23,7 +23,6 @@ import java.util.List;
  * @author stream
  * @since 2022-02-02
  */
-@CrossOrigin //允许跨域
 @Api(tags = "章节管理")
 @RestController
 @RequestMapping("/admin/edu/chapter")

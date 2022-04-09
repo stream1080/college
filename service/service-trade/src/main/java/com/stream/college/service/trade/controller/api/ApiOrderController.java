@@ -23,7 +23,6 @@ import java.util.List;
  * @author stream
  * @since 2022-04-04
  */
-@CrossOrigin //跨域
 @Slf4j
 @RestController
 @RequestMapping("/api/trade/order")

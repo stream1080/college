@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
  * @since 2022/4/3 19:53
  */
 @Slf4j
-@CrossOrigin //跨域
 @RestController
 @RequestMapping("/api/sms")
 @Api(tags = "短信管理")
@@ -45,9 +44,9 @@ public class ApiSmsController {
 
         //生成验证码
         String checkCode = RandomUtils.getFourBitRandom();
-
+        log.error("手机验证码：{}，mobile：{}", checkCode, mobile);
         //发送验证码
-        smsService.send(mobile, checkCode);
+//        smsService.send(mobile, checkCode);
 
         //存储验证码到redis
         redisTemplate.opsForValue().set(mobile, checkCode, 5, TimeUnit.MINUTES);

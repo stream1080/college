@@ -20,7 +20,6 @@ import java.util.List;
  * @author stream
  * @since 2022/4/2 22:58
  */
-@CrossOrigin
 @Api(tags = "课程")
 @RestController
 @RequestMapping("/api/edu/course")

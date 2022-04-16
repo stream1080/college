@@ -27,7 +27,6 @@ import java.util.List;
  * @since 2022-02-02
  */
 @Slf4j
-@CrossOrigin //允许跨域
 @Api(tags = "课程分类管理")
 @RestController
 @RequestMapping("/admin/edu/subject")

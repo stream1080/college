@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
  * @since 2022/3/20 14:53
  */
 @Slf4j
-@CrossOrigin
 @RestController
 @Api(tags = "阿里云文件管理")
 @RequestMapping("/admin/oss/file")

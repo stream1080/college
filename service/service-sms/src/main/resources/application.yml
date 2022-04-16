@@ -23,11 +23,8 @@ spring:
         max-idle: 8     #最大空闲连接，默认8
         min-idle: 0     #最小空闲连接，默认0
 
-#阿里云短信
-aliyun:
-  sms:
-    regionId:
-    keyId:
-    keySecret:
-    templateCode:
-    signName:
+  freemarker:
+    cache: false # 缓存配置 开发阶段应该配置为false 因为经常会改
+    suffix: .html # 模版后缀名 默认为ftl
+    charset: UTF-8 # 文件编码
+    template-loader-path: classpath:/templates/  # 存放模板的文件夹，以resource文件夹为相对路径

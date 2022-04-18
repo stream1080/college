@@ -17,6 +17,8 @@ public class RegisterVo implements Serializable {
 
     private String mobile;
 
+    private String email;
+
     private String password;
 
     private String code;

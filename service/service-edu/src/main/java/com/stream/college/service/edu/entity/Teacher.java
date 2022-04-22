@@ -3,6 +3,7 @@ package com.stream.college.service.edu.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.stream.college.common.utils.model.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -48,6 +49,7 @@ public class Teacher extends BaseEntity {
     private Integer sort;
 
     @ApiModelProperty(value = "入驻时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date joinDate;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")

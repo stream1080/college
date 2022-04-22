@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
  * @since 2022/4/16 17:47
  */
 @Slf4j
-@CrossOrigin
 @RestController
 @RequestMapping("/api/mail")
 @Api(tags = "邮件管理")
@@ -30,7 +29,7 @@ public class ApiMailController {
     private MailService mailService;
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     @GetMapping("send/{email}")
     public R getCode(@PathVariable String email) {
@@ -41,16 +40,19 @@ public class ApiMailController {
         }
         //生成验证码
         String code = RandomUtils.getSixBitRandom();
-        log.info("email: {}, code: {}",email,code);
-        //发送验证码
-        try {
-            mailService.sendCode(email, code, "verification.html");
-        } catch (Exception e) {
-            log.error(String.valueOf(e));
-            throw new CollegeException(ResultCodeEnum.MAIL_SEND_ERROR);
-        }
+        log.info("email: {}, code: {}", email, code);
         //将验证码存入redis缓存
         redisTemplate.opsForValue().set(email, code, 5, TimeUnit.MINUTES);
+
+        new Thread(() -> {
+            //发送验证码
+            try {
+                mailService.sendCode(email, code, "verification.html");
+            } catch (Exception e) {
+                log.error(String.valueOf(e));
+                throw new CollegeException(ResultCodeEnum.MAIL_SEND_ERROR);
+            }
+        }).start();
 
         return R.ok().message("邮件发送成功");
     }

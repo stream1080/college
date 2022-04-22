@@ -12,7 +12,6 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.io.Serializable;
 import java.time.Duration;
 
 /**
@@ -24,9 +23,9 @@ import java.time.Duration;
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory connectionFactory) {
 
-        RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer()); //key的序列化
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer()); //value序列化

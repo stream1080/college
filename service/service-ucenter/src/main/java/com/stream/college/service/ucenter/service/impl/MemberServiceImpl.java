@@ -1,6 +1,8 @@
 package com.stream.college.service.ucenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.stream.college.common.utils.dto.MemberDto;
 import com.stream.college.common.utils.exception.CollegeException;
@@ -11,6 +13,7 @@ import com.stream.college.common.utils.util.JwtUtils;
 import com.stream.college.common.utils.util.MD5;
 import com.stream.college.service.ucenter.entity.Member;
 import com.stream.college.service.ucenter.entity.vo.LoginVo;
+import com.stream.college.service.ucenter.entity.vo.MemberQueryVo;
 import com.stream.college.service.ucenter.entity.vo.RegisterVo;
 import com.stream.college.service.ucenter.mapper.MemberMapper;
 import com.stream.college.service.ucenter.service.MemberService;
@@ -19,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +39,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
     @Autowired
     private RedisTemplate redisTemplate;
+
 
     @Override
     public void register(RegisterVo registerVo) {
@@ -138,5 +145,48 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         MemberDto memberDto = new MemberDto();
         BeanUtils.copyProperties(member, memberDto);
         return memberDto;
+    }
+
+    @Override
+    public IPage<Member> selectPage(Page<Member> pageParam, MemberQueryVo memberQueryVo) {
+
+        //1、构造查询
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+
+        //2、分页查询
+        if (memberQueryVo == null) {
+            return baseMapper.selectPage(pageParam, queryWrapper);
+        }
+
+        //3、条件查询
+        String nikename = memberQueryVo.getNickname();
+        String email = memberQueryVo.getEmail();
+        String mobile = memberQueryVo.getMobile();
+
+        if (!StringUtils.isEmpty(nikename)) {
+            queryWrapper.likeRight("nikename", nikename);
+        }
+
+        if (!StringUtils.isEmpty(email)) {
+            queryWrapper.eq("email", email);
+        }
+
+        if (!StringUtils.isEmpty(mobile)) {
+            queryWrapper.ge("mobile", mobile);
+        }
+
+        Page<Member> memberPage = baseMapper.selectPage(pageParam, queryWrapper);
+        List<Member> list = new ArrayList<>();
+        for (int i = 0; i < memberPage.getRecords().size(); i++) {
+            Member member = memberPage.getRecords().get(i);
+            member.setPassword("");
+            member.setSign("");
+            member.setOpenid("");
+            member.setId("");
+            list.add(member);
+        }
+        memberPage.setRecords(list);
+
+        return memberPage;
     }
 }

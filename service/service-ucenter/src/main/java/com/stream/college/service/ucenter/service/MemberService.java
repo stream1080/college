@@ -1,9 +1,12 @@
 package com.stream.college.service.ucenter.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.stream.college.common.utils.dto.MemberDto;
 import com.stream.college.service.ucenter.entity.Member;
 import com.stream.college.service.ucenter.entity.vo.LoginVo;
+import com.stream.college.service.ucenter.entity.vo.MemberQueryVo;
 import com.stream.college.service.ucenter.entity.vo.RegisterVo;
 
 /**
@@ -23,4 +26,6 @@ public interface MemberService extends IService<Member> {
     Member getByOpenid(String openid);
 
     MemberDto getMemberDtoByMemberId(String memberId);
+
+    IPage<Member> selectPage(Page<Member> pageParam, MemberQueryVo memberQueryVo);
 }

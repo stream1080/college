@@ -2,6 +2,9 @@ package com.stream.college.service.edu.mapper;
 
 import com.stream.college.service.edu.entity.CourseCollect;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.stream.college.service.edu.entity.vo.CourseCollectVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CourseCollectMapper extends BaseMapper<CourseCollect> {
 
+    List<CourseCollectVo> selectPageByMemberId(String memberId);
 }

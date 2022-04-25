@@ -1,6 +1,7 @@
 package com.stream.college.service.edu.controller.api;
 
 
+import com.stream.college.common.utils.dto.CourseDto;
 import com.stream.college.common.utils.result.R;
 import com.stream.college.service.edu.entity.Course;
 import com.stream.college.service.edu.entity.vo.ChapterVo;
@@ -12,7 +13,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -55,5 +59,23 @@ public class ApiCourseController {
         List<ChapterVo> chapterVoList = chapterService.nestedList(courseId);
 
         return R.ok().data("course", webCourseVo).data("chapterVoList", chapterVoList);
+    }
+
+    @ApiOperation("根据课程id查询课程信息")
+    @GetMapping("inner/get-course-dto/{courseId}")
+    public CourseDto getCourseDtoById(
+            @ApiParam(value = "课程ID", required = true)
+            @PathVariable String courseId){
+        CourseDto courseDto = courseService.getCourseDtoById(courseId);
+        return courseDto;
+    }
+
+    @ApiOperation("根据课程id更改销售量")
+    @GetMapping("inner/update-buy-count/{id}")
+    public R updateBuyCountById(
+            @ApiParam(value = "课程id", required = true)
+            @PathVariable String id){
+        courseService.updateBuyCountById(id);
+        return R.ok();
     }
 }

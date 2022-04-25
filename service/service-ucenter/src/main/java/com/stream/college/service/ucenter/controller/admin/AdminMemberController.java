@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,13 @@ public class AdminMemberController {
     @Autowired
     MemberService memberService;
 
+    @ApiOperation("查询所有会员")
+    @GetMapping("list")
+    public R listAll() {
+        List<Member> list = memberService.listAll();
+        return R.ok().data("items", list);
+    }
+
     @ApiOperation("会员分页列表")
     @GetMapping("list/{page}/{limit}")
     public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
@@ -42,5 +46,52 @@ public class AdminMemberController {
         List<Member> records = pageModel.getRecords();
         long total = pageModel.getTotal();
         return R.ok().data("total", total).data("rows", records);
+    }
+
+    @ApiOperation(value = "根据ID禁用会员")
+    @DeleteMapping("disable/{id}")
+    public R disableById(@ApiParam(value = "讲师ID", required = true) @PathVariable String id) {
+        boolean result = memberService.editDisableById(id,true);
+        if (result) {
+            return R.ok().message("禁用成功");
+        } else {
+            return R.error().message("数据不存在");
+        }
+    }
+
+    @ApiOperation(value = "根据ID解禁会员")
+    @DeleteMapping("available/{id}")
+    public R availableById(@ApiParam(value = "讲师ID", required = true) @PathVariable String id) {
+        boolean result = memberService.editDisableById(id,false);
+        if (result) {
+            return R.ok().message("解禁成功");
+        } else {
+            return R.error().message("数据不存在");
+        }
+    }
+
+    @ApiOperation("更新会员")
+    @PutMapping("update")
+    public R updateById(@ApiParam("会员对象") @RequestBody Member member) {
+        boolean result = memberService.updateById(member);
+        if (result) {
+            return R.ok().message("修改成功");
+        } else {
+            return R.error().message("数据不存在");
+        }
+    }
+
+    @ApiOperation("根据id获取会员信息")
+    @GetMapping("get/{id}")
+    public R getById(@ApiParam("会员对象") @PathVariable String id) {
+        Member member = memberService.getById(id);
+        if (member != null) {
+            member.setPassword("");
+            member.setSign("");
+            member.setOpenid("");
+            return R.ok().data("item", member);
+        } else {
+            return R.error().message("数据不存在");
+        }
     }
 }

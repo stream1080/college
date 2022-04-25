@@ -15,7 +15,7 @@ public class EduCourseServiceFallback implements EduCourseService {
 
     @Override
     public CourseDto getCourseDtoById(String courseId) {
-        log.info("熔断保护");
+        log.info("熔断保护: {}",courseId);
         return null;
     }
 }

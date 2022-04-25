@@ -9,6 +9,8 @@ import com.stream.college.service.ucenter.entity.vo.LoginVo;
 import com.stream.college.service.ucenter.entity.vo.MemberQueryVo;
 import com.stream.college.service.ucenter.entity.vo.RegisterVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 会员表 服务类
@@ -28,4 +30,9 @@ public interface MemberService extends IService<Member> {
     MemberDto getMemberDtoByMemberId(String memberId);
 
     IPage<Member> selectPage(Page<Member> pageParam, MemberQueryVo memberQueryVo);
+
+    List<Member> listAll();
+
+    boolean editDisableById(String id,boolean isDisable);
+
 }

@@ -172,7 +172,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         }
 
         if (!StringUtils.isEmpty(mobile)) {
-            queryWrapper.ge("mobile", mobile);
+            queryWrapper.eq("mobile", mobile);
         }
 
         Page<Member> memberPage = baseMapper.selectPage(pageParam, queryWrapper);
@@ -182,11 +182,30 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
             member.setPassword("");
             member.setSign("");
             member.setOpenid("");
-            member.setId("");
             list.add(member);
         }
         memberPage.setRecords(list);
 
         return memberPage;
     }
+
+    @Override
+    public List<Member> listAll() {
+        List<Member> members = baseMapper.selectList(null);
+        for (int i = 0; i < members.size(); i++) {
+            members.get(i).setPassword("");
+            members.get(i).setSign("");
+            members.get(i).setOpenid("");
+        }
+        return members;
+    }
+
+    @Override
+    public boolean editDisableById(String id, boolean isDisable) {
+        Member member = baseMapper.selectById(id);
+        member.setDisabled(isDisable);
+        int i = baseMapper.updateById(member);
+        return i==1;
+    }
+
 }

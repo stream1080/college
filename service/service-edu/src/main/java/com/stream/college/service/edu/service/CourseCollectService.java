@@ -1,7 +1,10 @@
 package com.stream.college.service.edu.service;
 
-import com.stream.college.service.edu.entity.CourseCollect;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.stream.college.service.edu.entity.CourseCollect;
+import com.stream.college.service.edu.entity.vo.CourseCollectVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CourseCollectService extends IService<CourseCollect> {
 
+    boolean isCollect(String courseId, String id);
+
+    void saveCourseCollect(String courseId, String id);
+
+    List<CourseCollectVo> selectListByMemberId(String id);
+
+    boolean removeCourseCollect(String courseId, String id);
 }

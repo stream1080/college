@@ -2,6 +2,7 @@ package com.stream.college.service.trade.controller.api;
 
 
 import com.stream.college.common.utils.result.R;
+import com.stream.college.common.utils.result.ResultCodeEnum;
 import com.stream.college.common.utils.util.JwtInfo;
 import com.stream.college.common.utils.util.JwtUtils;
 import com.stream.college.service.trade.entity.Order;
@@ -34,7 +35,7 @@ public class ApiOrderController {
 
     @ApiOperation("新增订单")
     @PostMapping("auth/save/{courseId}")
-    public R save(@PathVariable String courseId, HttpServletRequest request) {
+    public R save(@PathVariable String courseId, HttpServletRequest request){
 
         JwtInfo jwtInfo = JwtUtils.getMemberIdByJwtToken(request);
         String orderId = orderService.saveOrder(courseId, jwtInfo.getId());
@@ -49,7 +50,7 @@ public class ApiOrderController {
         return R.ok().data("item", order);
     }
 
-    @ApiOperation("判断课程是否购买")
+    @ApiOperation( "判断课程是否购买")
     @GetMapping("auth/is-buy/{courseId}")
     public R isBuyByCourseId(@PathVariable String courseId, HttpServletRequest request) {
         JwtInfo jwtInfo = JwtUtils.getMemberIdByJwtToken(request);
@@ -70,11 +71,19 @@ public class ApiOrderController {
     public R remove(@PathVariable String orderId, HttpServletRequest request) {
         JwtInfo jwtInfo = JwtUtils.getMemberIdByJwtToken(request);
         boolean result = orderService.removeById(orderId, jwtInfo.getId());
-        if (result) {
+        if(result){
             return R.ok().message("删除成功");
-        } else {
+        }else{
             return R.error().message("数据不存在");
         }
     }
-}
 
+    @GetMapping("/query-pay-status/{orderNo}")
+    public R queryPayStatus(@PathVariable String orderNo) {
+        boolean result = orderService.queryPayStatus(orderNo);
+        if (result) {//支付成功
+            return R.ok().message("支付成功");
+        }
+        return R.setResult(ResultCodeEnum.PAY_RUN);//支付中
+    }
+}

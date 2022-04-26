@@ -150,6 +150,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     @Override
     public IPage<Member> selectPage(Page<Member> pageParam, MemberQueryVo memberQueryVo) {
 
+
         //1、构造查询
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
 
@@ -159,12 +160,12 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         }
 
         //3、条件查询
-        String nikename = memberQueryVo.getNickname();
+        String nickname = memberQueryVo.getNickname();
         String email = memberQueryVo.getEmail();
         String mobile = memberQueryVo.getMobile();
 
-        if (!StringUtils.isEmpty(nikename)) {
-            queryWrapper.likeRight("nikename", nikename);
+        if (!StringUtils.isEmpty(nickname)) {
+            queryWrapper.likeRight("nickname", nickname);
         }
 
         if (!StringUtils.isEmpty(email)) {

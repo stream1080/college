@@ -1,6 +1,7 @@
 package com.stream.college.service.trade.feign.fallback;
 
 import com.stream.college.common.utils.dto.CourseDto;
+import com.stream.college.common.utils.result.R;
 import com.stream.college.service.trade.feign.EduCourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,12 @@ public class EduCourseServiceFallback implements EduCourseService {
 
     @Override
     public CourseDto getCourseDtoById(String courseId) {
+        log.info("熔断保护: {}",courseId);
+        return null;
+    }
+
+    @Override
+    public R updateBuyCountById(String courseId) {
         log.info("熔断保护: {}",courseId);
         return null;
     }

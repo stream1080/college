@@ -3,21 +3,27 @@ package com.stream.college.service.trade.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.gson.Gson;
 import com.stream.college.common.utils.dto.CourseDto;
 import com.stream.college.common.utils.dto.MemberDto;
 import com.stream.college.common.utils.exception.CollegeException;
 import com.stream.college.common.utils.result.ResultCodeEnum;
 import com.stream.college.service.trade.entity.Order;
+import com.stream.college.service.trade.entity.PayLog;
 import com.stream.college.service.trade.feign.EduCourseService;
 import com.stream.college.service.trade.feign.UcenterMemberService;
 import com.stream.college.service.trade.mapper.OrderMapper;
+import com.stream.college.service.trade.mapper.PayLogMapper;
 import com.stream.college.service.trade.service.OrderService;
 import com.stream.college.service.trade.util.OrderNoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,6 +35,9 @@ import java.util.List;
  */
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
+
+    @Autowired
+    PayLogMapper payLogMapper;
 
     @Autowired
     private EduCourseService eduCourseService;
@@ -119,5 +128,50 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .eq("id", orderId)
                 .eq("member_id", memberId);
         return this.remove(queryWrapper);
+    }
+
+    @Override
+    public Order getOrderByOrderNo(String orderNo) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_no", orderNo);
+        return baseMapper.selectOne(queryWrapper);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void updateOrderStatus(Map<String, String> notifyMap) {
+
+        //更新订单状态
+        String outTradeNo = notifyMap.get("out_trade_no");
+        Order order = this.getOrderByOrderNo(outTradeNo);
+        order.setStatus(1);//支付成功
+        baseMapper.updateById(order);
+
+        //记录支付日志
+        PayLog payLog = new PayLog();
+        payLog.setOrderNo(outTradeNo);
+        payLog.setPayTime(new Date());
+        payLog.setPayType(1);//支付类型：微信支付
+        payLog.setTotalFee(Long.parseLong(notifyMap.get("total_fee")));
+        payLog.setTradeState(notifyMap.get("result_code"));
+        payLog.setTransactionId(notifyMap.get("transaction_id"));
+        payLog.setAttr(new Gson().toJson(notifyMap));
+        payLogMapper.insert(payLog);
+
+        //更新课程销量
+        eduCourseService.updateBuyCountById(order.getCourseId());
+    }
+
+    /**
+     * 查询支付结果
+     * @param orderNo
+     * @return true 已支付  false 未支付
+     */
+    @Override
+    public boolean queryPayStatus(String orderNo) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_no", orderNo);
+        Order order = baseMapper.selectOne(queryWrapper);
+        return order.getStatus() == 1;
     }
 }

@@ -116,4 +116,16 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
         return baseMapper.selectList(queryWrapper);
     }
+
+
+    @Override
+    public List<Map<String, Object>> selectNameList(String key) {
+
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name");
+        queryWrapper.likeRight("name", key);
+
+        List<Map<String, Object>> list = baseMapper.selectMaps(queryWrapper);
+        return list;
+    }
 }

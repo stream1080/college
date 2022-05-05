@@ -51,4 +51,6 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     List<Teacher> selectHotTeacher();
+
+    List<Map<String, Object>> selectNameList(String key);
 }
